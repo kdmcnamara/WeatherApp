@@ -3,7 +3,6 @@ import 'package:weather_icons/weather_icons.dart';
 import './current.dart';
 import './hourly.dart';
 import './daily.dart';
-import 'dart:convert';
 
 class CityWeatherDataModel {
   var name;
@@ -27,13 +26,13 @@ class CityWeatherDataModel {
     return _cache.putIfAbsent(
         lat.toString(),
         () => CityWeatherDataModel._internal(
-            lat, lon, timezone, timezone_offset, current, hourly, daily));
+            name, lat, lon, timezone, timezone_offset, current, hourly, daily));
   }
 
   static final Map<String, CityWeatherDataModel> _cache =
       <String, CityWeatherDataModel>{};
 
-  CityWeatherDataModel._internal(this.lat, this.lon, this.timezone,
+  CityWeatherDataModel._internal(this.name, this.lat, this.lon, this.timezone,
       this.timezone_offset, this.current, this.hourly, this.daily);
 
   /*
@@ -70,7 +69,7 @@ class CityWeatherDataModel {
 */
   factory CityWeatherDataModel.fromJson(Map<String, dynamic> json) {
     return CityWeatherDataModel(
-        name: json['name'] == null ? null : json['name'],
+        name: json['name'],
         lat: json['lat'],
         lon: json['lon'],
         timezone: json['timezone'],

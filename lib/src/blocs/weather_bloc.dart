@@ -9,6 +9,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:weatherapi/src/repositories/weather_data_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../prefs/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherDataRepository weatherRepository;

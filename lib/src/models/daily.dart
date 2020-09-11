@@ -21,8 +21,8 @@ class Daily {
       {var dt,
       var sunrise,
       var sunset,
-      var temp,
-      var feels_like,
+      Temp temp,
+      FeelsLike feels_like,
       var pressure,
       var humidity,
       var dew_point,
@@ -30,15 +30,25 @@ class Daily {
       var wind_deg,
       Weather weather}) {
     return _cache.putIfAbsent(
-        temp.toString(),
-        () => Daily._internal(dt, sunrise, sunset, temp, feels_like, pressure,
-            humidity, dew_point, wind_speed, wind_deg, weather));
+        dt.toString(),
+        () => Daily._internal(
+            dt: dt,
+            sunrise: sunrise,
+            sunset: sunset,
+            temp: temp,
+            feels_like: feels_like,
+            pressure: pressure,
+            humidity: humidity,
+            dew_point: dew_point,
+            wind_speed: wind_speed,
+            wind_deg: wind_deg,
+            weather: weather));
   }
 
   static final Map<String, Daily> _cache = <String, Daily>{};
 
   Daily._internal(
-      this.dt,
+      {this.dt,
       this.sunrise,
       this.sunset,
       this.temp,
@@ -48,7 +58,7 @@ class Daily {
       this.dew_point,
       this.wind_speed,
       this.wind_deg,
-      this.weather);
+      this.weather});
 /*
   Daily(
       {this.dt,
@@ -92,10 +102,12 @@ class Daily {
         wind_deg: json['wind_deg'],
         weather: Weather.fromJson(json['weather'][0]));
   }
+
   static listFromJson(Map<String, dynamic> json) {
     List<Daily> list = new List<Daily>();
     for (final item in json['daily']) {
-      list.add(Daily.fromJson(item));
+      Daily daily = Daily.fromJson(item);
+      list.add(daily);
     }
     return list;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weatherapi/src/blocs/weather_bloc.dart';
 import 'package:weatherapi/src/blocs/weather_event.dart';
 import 'package:weatherapi/src/repositories/weather_data_repository.dart';
@@ -66,7 +67,7 @@ class HomeScreenState extends State<HomeScreen> {
     try {
       final prefs = SharedPrefs();
       CityWeatherDataModel weather =
-          CityWeatherDataModel.fromJson(await prefs.load("weather"));
+          CityWeatherDataModel.fromJson(await prefs.load('weather'));
 
       // Get previously stored weather
       //weatherBloc.dispatch(GetWeatherFromPrefs(weather: weather));

@@ -104,7 +104,6 @@ class Current {
 */
 
   factory Current.fromJson(Map<String, dynamic> json) {
-    print('beforeCurr');
     return Current(
         dt: json['dt'],
         sunrise: json['sunrise'],
